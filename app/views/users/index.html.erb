@@ -1,0 +1,33 @@
+<% if current_user.admin? %>
+  <h1>Users <%= link_to 'New User', new_user_path,class: 'btn btn-sm btn-primary' %></h1>
+  <table class = 'table table-hover table-bordered'>
+    <thead>
+      <tr>
+        <th class="text-center">First Name</th>
+        <th class="text-center">Last Name</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Role</th>
+        <th class="text-center" colspan="3"> Actions </th>
+      </tr>
+    </thead>
+  <% if !@users.nil? %>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr scope = 'row'>
+          <td class="text-center"><%= user.first_name %></td>
+          <td class="text-center"><%= user.last_name %></td>
+          <td class="text-center"><%= user.email %></td>
+          <td class="text-center"><%= user.role %></td>
+          <td class="text-center"><%= link_to 'Show', user,class: 'btn btn-sm btn-primary' %></td>
+          <td class="text-center"><%= link_to 'Edit', edit_user_path(user), class: 'btn btn-sm btn-warning' %></td>
+          <td class="text-center"><%= link_to 'destroy', user, class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    No users yet.
+  <% end %>
+  </table>
+<% else %>
+  There is a lot more coming up for you
+<% end %>
